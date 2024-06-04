@@ -29,7 +29,7 @@
     },
     "bundle": {
       "active": true,
-      "targets": "all",
+      "targets": ["deb", "nsis", "msi", "app", "dmg", "updater"],
       "identifier": "com.git-rustler.app",
       "icon": [
         "icons/32x32.png",
