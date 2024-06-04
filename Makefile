@@ -1,2 +1,5 @@
 dev:
-	bun run tauri dev
+	cargo tauri dev
+
+build:
+	cargo tauri build

@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
+// import reactLogo from "./assets/react.svg";
 import { invoke } from "@tauri-apps/api/tauri";
 import "./App.css";
 
@@ -8,7 +8,7 @@ import { Button, Modal } from "flowbite-react";
 
 function App() {
   const [greetMsg, setGreetMsg] = useState("");
-  const [name, setName] = useState("");
+  const [name] = useState("");
   const [openModal, setOpenModal] = useState(false);
 
   async function greet() {
