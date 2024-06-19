@@ -1,9 +1,22 @@
 import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
+import vue from '@vitejs/plugin-vue'
+import AutoImport from 'unplugin-auto-import/vite'
+import { fileURLToPath } from 'node:url'
 
 // https://vitejs.dev/config/
 export default defineConfig(async () => ({
-  plugins: [react()],
+  plugins: [
+    vue(),
+    AutoImport({
+      imports: ['vue', '@vueuse/core', '@vueuse/math', 'pinia'],
+      vueTemplate: true,
+    }),
+  ],
+  resolve: {
+    alias: {
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
+    }
+  },
 
   // Vite options tailored for Tauri development and only applied in `tauri dev` or `tauri build`
   //
