@@ -14,6 +14,32 @@ pub struct AppConfig {
 }
 
 
+impl AppConfig {
+    pub fn add_location(&mut self, location: String) {
+        if !self.locations.contains(&location) {
+            self.locations.push(location);
+        }
+    }
+
+    pub fn remove_location(&mut self, location: &str) {
+        self.locations.retain(|x| x != location);
+    }
+
+    // Generic method to add an item to a Vec field
+    pub fn add_item<T: PartialEq + Clone>(&mut self, field: &mut Vec<T>, item: T) {
+        if !field.contains(&item) {
+            field.push(item);
+        }
+    }
+
+    // Generic method to remove an item from a Vec field
+    pub fn remove_item<T: PartialEq>(&mut self, field: &mut Vec<T>, item: &T) {
+        field.retain(|x| x != item);
+    }
+}
+
+
+
 pub fn load_config() -> Result<AppConfig, Box<dyn std::error::Error>> {
     let home_dir = dirs::home_dir().unwrap();
     let home_path = PathBuf::from(home_dir);
@@ -49,3 +75,21 @@ pub fn load_config() -> Result<AppConfig, Box<dyn std::error::Error>> {
 
     Ok(config)
 }
+
+
+pub fn save_config(config: &AppConfig) -> Result<(), Box<dyn std::error::Error>> {
+    let home_dir = dirs::home_dir().unwrap();
+    let home_path = PathBuf::from(home_dir);
+    let config_abs_path = home_path.join(CONFIG_PATH);
+
+    let toml_string = ser::to_string(config)?;
+
+    let mut config_file = OpenOptions::new()
+        .write(true)
+        .truncate(true)
+        .open(config_abs_path.as_path())?;
+    config_file.write_all(toml_string.as_bytes())?;
+
+    Ok(())
+}
+

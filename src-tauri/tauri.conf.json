@@ -15,6 +15,14 @@
       "shell": {
         "all": false,
         "open": true
+      },
+      "dialog": {
+        "all": true,
+        "ask": true,
+        "confirm": true,
+        "message": true,
+        "open": true,
+        "save": true
       }
     },
     "windows": [
@@ -29,7 +37,7 @@
     },
     "bundle": {
       "active": true,
-      "targets": ["deb", "nsis", "msi", "app", "dmg", "updater"],
+      "targets": "all",
       "identifier": "com.git-rustler.app",
       "icon": [
         "icons/32x32.png",
